@@ -3,15 +3,23 @@ namespace API.Entities
     public class AppUser
     {
         /// <summary>
-        ///
+        /// The user id
         /// </summary>
-        /// <value></value>
         public int Id { get; set; }
 
         /// <summary>
-        ///
+        /// The user's name
         /// </summary>
-        /// <value></value>
         public string UserName { get; set; }
+
+        /// <summary>
+        /// The password hash
+        /// </summary>
+        public byte[] PasswordHash { get; set; }
+
+        /// <summary>
+        /// The password salt
+        /// </summary>
+        public byte[] PasswordSalt { get; set; }
     }
 }

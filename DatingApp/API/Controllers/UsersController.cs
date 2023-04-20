@@ -1,5 +1,6 @@
 using API.Data;
 using API.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -8,9 +9,8 @@ namespace API.Controllers
     /// <summary>
     /// Defines the API routes for User related methods
     /// </summary>
-    [ApiController]
-    [Route("api/[controller]")] // /api/Users
-    public class UsersController : ControllerBase
+    [Authorize]
+    public class UsersController : BaseApiController
     {
         /// <summary>
         /// The database context
