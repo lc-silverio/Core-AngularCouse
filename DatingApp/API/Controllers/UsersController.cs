@@ -9,7 +9,7 @@ namespace API.Controllers
     /// <summary>
     /// Defines the API routes for User related methods
     /// </summary>
-    [Authorize]
+    [AllowAnonymous]
     public class UsersController : BaseApiController
     {
         /// <summary>
@@ -42,6 +42,7 @@ namespace API.Controllers
         /// <param name="id"></param>
         /// <returns>Returns the user that matches the provided id</returns>
         [HttpGet("{id}")]
+        [Authorize]
         public async Task<ActionResult<AppUser>> GetUser(int id)
         {
             return await _context.Users.FindAsync(id);
