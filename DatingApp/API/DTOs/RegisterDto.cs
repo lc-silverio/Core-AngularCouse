@@ -17,6 +17,7 @@ namespace API.DTOs
         /// The password
         /// </summary>
         [Required]
+        [StringLength(maximumLength: 8, MinimumLength = 4)]
         public string Password { get; set; }
     }
 }

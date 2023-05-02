@@ -18,7 +18,7 @@ namespace API.Controllers
         private readonly DataContext _context;
 
         /// <summary>
-        /// /// Initializes a new instance of the <see cref="UsersController{T}"/> class.
+        /// Initializes a new instance of the <see cref="UsersController{T}"/> class.
         /// </summary>
         /// <param name="context"></param>
         public UsersController(DataContext context)
