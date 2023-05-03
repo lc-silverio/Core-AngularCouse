@@ -5,21 +5,10 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
 {
-    /// <summary>
-    /// Provides methods for handling http error pages
-    /// </summary>
-    public class ErrorController : BaseApiController
+    public class BuggyController : BaseApiController
     {
-        /// <summary>
-        /// The data context
-        /// </summary>
         private readonly DataContext _context;
-
-        /// <summary>
-        /// Instatiates a new instance of ErrorController
-        /// </summary>
-        /// <param name="context"></param>
-        public ErrorController(DataContext context)
+        public BuggyController(DataContext context)
         {
             _context = context;
         }
@@ -35,29 +24,26 @@ namespace API.Controllers
         public ActionResult<AppUser> GetNotFound()
         {
             var thing = _context.Users.Find(-1);
+
             if (thing == null) return NotFound();
+
             return thing;
         }
 
         [HttpGet("server-error")]
         public ActionResult<string> GetServerError()
         {
-            try
-            {
-                var thing = _context.Users.Find(-1);
-                var thingToReturn = thing.ToString();
-                return thingToReturn;
-            }
-            catch
-            {
-                return StatusCode(500, "Computer say no!");
-            }
+            var thing = _context.Users.Find(-1);
+
+            var thingToReturn = thing.ToString();
+
+            return thingToReturn;
         }
 
         [HttpGet("bad-request")]
         public ActionResult<string> GetBadRequest()
         {
-            return BadRequest("this was not a good request");
+            return BadRequest("This was not a good request");
         }
     }
 }
