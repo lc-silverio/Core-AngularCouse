@@ -26,10 +26,10 @@ export class PhotoEditorComponent implements OnInit {
         if (user) this.user = user
       }
     })
-  }
+   }
 
   ngOnInit(): void {
-    this.initializeUploader()
+    this.initializeUploader();
   }
 
   fileOverBase(e: any) {
@@ -52,26 +52,26 @@ export class PhotoEditorComponent implements OnInit {
     })
   }
 
+  deletePhoto(photoId: number) {
+    this.memberService.deletePhoto(photoId).subscribe({
+      next: _ => {
+        if (this.member) {
+          this.member.photos = this.member.photos.filter(x => x.id !== photoId);
+        }
+      }
+    })
+  }
+
   initializeUploader() {
     this.uploader = new FileUploader({
       url: this.baseUrl + 'users/add-photo',
-      authToken: `Bearer ${this.user?.token}`,
+      authToken: 'Bearer ' + this.user?.token,
       isHTML5: true,
       allowedFileType: ['image'],
       removeAfterUpload: true,
       autoUpload: false,
-      maxFileSize: 10 * 1024 * 1024,
-    })
-
-    deletePhoto(photoId: Number){
-      this.memberService.deletePhoto(photoId).subscribe({
-          next: () => {
-            if(this.member){
-              this.member.photos = this.member.photos.filter(x => x.id != photoId);
-            }
-          }
-      })
-    }
+      maxFileSize: 10 * 1024 * 1024
+    });
 
     this.uploader.onAfterAddingFile = (file) => {
       file.withCredentials = false
@@ -80,7 +80,7 @@ export class PhotoEditorComponent implements OnInit {
     this.uploader.onSuccessItem = (item, response, status, headers) => {
       if (response) {
         const photo = JSON.parse(response);
-        this.member?.photos.push(photo)
+        this.member?.photos.push(photo);
       }
     }
   }
